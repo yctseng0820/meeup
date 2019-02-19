@@ -8,7 +8,7 @@
 
     <div class="am-u-sm-7 am-u-md-9 am-list-main">
         <h3 class="am-list-item-hd">
-            <a href="issues_show.html" class="">{{$issue->title}}</a>
+            <a href="{{route('issues.show', $issue->id)}}" class="">{{$issue->title}}</a>
         </h3>
 
         <div class="am-list-item-text">
