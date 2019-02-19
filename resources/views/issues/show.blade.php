@@ -22,24 +22,28 @@
                 <div class="am-comment-bd"><p>{{$issue->content}}</p></div>
             </div>
         </li>
-
+        @foreach($comments as $comment)
         <li class="am-comment">
             <img src="assets/img/avatar2.png" alt="" class="am-comment-avatar" width="48" height="48">
 
             <div class="am-comment-main">
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
-                        <span class="am-comment-author">Pipi</span>
-                        about 12 hours ago
+                        <em><span class="am-comment-author">{{$comment->name}}</span></em>
+                        <span class="am-comment-author">{{$comment->email}}</span>
+                        {{$comment->created_at->diffforHumans()}}
                     </div>
                 </header>
-                <div class="am-comment-bd"><p>Love this site!</p></div>
+                <div class="am-comment-bd"><p>{{$comment->content}}</p></div>
             </div>
         </li>
+        @endforeach
     </ul>
 
-    <form class="am-form" method="post">
+    <form class="am-form" action="{{route('comments.store')}}" method="post">
         <fieldset>
+            {{csrf_field()}}
+            <input type="hidden" name="issue_id" value="{{$issue->id}}">
             <div class="am-form-group">
                 <label>用户名</label>
                 <input type="text" placeholder="输入用户名" name="name">

@@ -15,3 +15,4 @@ Route::get('/', 'WelcomeController@index');
 Route::get('about', 'WelcomeController@about');
 
 Route::resource('issues', 'IssuesController');
+Route::resource('comments', 'CommentsController', ['only'=>'store']);

@@ -49,7 +49,8 @@ class IssuesController extends Controller
     public function show($id)
     {
         $issue = Issue::find($id);
-        return view('issues.show')->with('issue', $issue);
+        $comments = $issue->comments;
+        return view('issues.show', compact('issue', 'comments'));
     }
 
     /**
