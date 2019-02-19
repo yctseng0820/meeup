@@ -60,7 +60,8 @@ class IssuesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $issue = Issue::find($id);
+        return view('issues.edit')->with('issue', $issue);
     }
 
     /**
@@ -72,7 +73,9 @@ class IssuesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $issue = Issue::find($id);
+        $issue->update($request->all());
+        return redirect(route('issues.index'));
     }
 
     /**
@@ -83,6 +86,7 @@ class IssuesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Issue::destroy($id);
+        return redirect('/');
     }
 }

@@ -3,8 +3,8 @@
 <div class="issue-heading">
     <div class="am-container">
         {{$issue->title}}
-        <a type="button" class="am-btn am-btn-danger am-radius am-btn-sm">Destroy</a>
-        <a type="button" class="am-btn am-btn-primary am-radius am-btn-sm">Edit</a>
+        <a href="{{route('issues.destroy', $issue->id)}}" type="button" class="am-btn am-btn-danger am-radius am-btn-sm" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure?">Destroy</a>
+        <a href="{{route('issues.edit', $issue->id)}}" type="button" class="am-btn am-btn-primary am-radius am-btn-sm">Edit</a>
     </div>
 </div>
 
