@@ -14,7 +14,8 @@ class IssuesController extends Controller
      */
     public function index()
     {
-        //
+        $issues = Issue::orderby('created_at', 'desc')->paginate(5);
+        return view('issues.index')->with('issues', $issues);
     }
 
     /**
@@ -24,7 +25,7 @@ class IssuesController extends Controller
      */
     public function create()
     {
-        //
+        return view('issues.create');
     }
 
     /**
@@ -35,7 +36,8 @@ class IssuesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Issue::create($request->all());
+        return redirect('/');
     }
 
     /**
