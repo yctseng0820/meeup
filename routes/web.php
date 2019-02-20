@@ -16,3 +16,7 @@ Route::get('about', 'WelcomeController@about');
 
 Route::resource('issues', 'IssuesController');
 Route::resource('comments', 'CommentsController', ['only'=>'store']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
