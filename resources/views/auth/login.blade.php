@@ -1,73 +1,74 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <div class="detail">
+        <div class="am-g am-container">
+            <div class="am-u-lg-12">
+                <h1 class="detail-h1">Login</h1>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="am-g">
+        <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+            <div class="am-btn-group">
+                <a href="/auth/qq" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-qq am-icon-sm"></i> QQ</a>
+                <a href="#" class="am-btn am-btn-danger am-btn-sm"><i class="am-icon-weibo am-icon-sm"></i> Weibo</a>
+                <a href="#" class="am-btn am-btn-default am-btn-sm"><i class="am-icon-github am-icon-sm"></i> Github</a>
+            </div>
+            <br>
+            <br>
+
+            <form method="post" class="am-form" action="{{ route('login') }}">
+                {{ csrf_field() }}
+
+                <div class="am-form-group am-form-icon am-form-feedback {{ $errors->has('email') ? ' am-form-error' : '' }}">
+                    <label class="am-form-label" for="email">郵箱: </label>
+                    <input type="text" id="email" name="email" class="am-form-field" placeholder="输入你的郵箱" value="{{old('email')}}">
+
+                    @if ($errors->has('email'))
+                        <span class="am-icon-warning">{{$errors->first('email')}}</span>
+                    @endif
+                </div>
+
+                <div class="am-form-group am-form-icon am-form-feedback {{ $errors->has('password') ? ' am-form-error' : '' }}">
+                    <label class="am-form-label" for="password">密码: </label>
+                    <input type="password" name="password" id="password" class="am-form-field" placeholder="输入你的密码">
+
+                    @if ($errors->has('password'))
+                        <span class="am-icon-warning">{{$errors->first('password')}}</span>
+                    @endif
+                </div>
+
+                
+                <div class="am-form-group am-form-icon am-form-feedback">
+                    <label class="am-form-label" for="captcha">验证码: </label>
+
+                    <div class="am-g doc-am-g">
+                        <div class="am-u-sm-9">
+                            <input type="text" name="captcha" id="captcha" class="am-form-field" placeholder="输入你的验证码">
+                        </div>
+                        <div class="am-u-sm-3">
+                            <img src="assets/img/captcha.png" alt="" style="cursor: pointer;">
+                        </div>
+                    </div>
+                </div>
+
+                <label for="remember-me">
+                    <input id="remember-me" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                    记住密码
+                </label>
+                <br>
+
+                <hr>
+                <div class="am-cf">
+                    <input type="submit" name="" value="Login" class="am-btn am-btn-secondary am-btn-sm am-fl">
+                    <a href="{{ route('password.request') }}" class="am-btn am-btn-default am-btn-sm am-fr">Forget
+                        Password ^_^?</a>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
 @endsection
